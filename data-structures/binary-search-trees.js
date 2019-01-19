@@ -160,10 +160,12 @@ tree.insert(7)
 // Height here counts the branches, not the root
 function treeHeight(tree){
     if(!tree) return -1;
-    
+    // Find the left side height
     let leftHeight = treeHeight(tree.left);
+    // Find the right side height
     let rightHeight = treeHeight(tree.right);
-
+    // Compare left and right and keep the largest
+    // Add 1 to offset the initial -1
     return Math.max(leftHeight, rightHeight) + 1;
 
     // With if instead of Math method:
@@ -180,26 +182,40 @@ treeHeight(tree);
 
 // Write an algorithm to check whether an arbitrary binary tree is a binary search tree, 
 // assuming the tree does not contain duplicates
-function checkBST(node, min = null, max = null) {
-    if (max !== null && node.data > max) {
-      return false;
-    }
-  
-    if (min !== null && node.data < min) {
-      return false;
-    }
-  
-    if (node.left && !checkBST(node.left, min, node.data)) {
-      return false;
-    }
-  
-    if (node.right && !checkBST(node.right, node.data, max)) {
-      return false;
-    }
-  
-    return true;
-};
 
-checkBST(tree);
+// Function is called multiple times (recursion) and new min and max will be passed in
+function checkBST(tree, min = null, max = null) {
+    // Values on the left side of the tree should always be less than the max
+    // If any value is greater than the max, BST is false
+    if (max !== null && tree.data > max) {
+        return false;
+    }
+    // Values on the right side of the tree should always be greater than the min
+    // If any value is less than the min, BST is false
+    if (min !== null && tree.data < min) {
+        return false;
+    }
+    // The if statement is looking for a left node that also (&&) returns false (!)
+    // If there is no left node, leave the if and check for another branch
+    // Run the function on the left-side branch, passing that node's value as the max
+    // If running checkBST on the left returns true, leave the loop and check for another branch
+    // If it returns false, BST is false
+    if (tree.left && !checkBST(tree.left, min, tree.data)) {
+        return false;
+    }
+    // The if statement is looking for a right node that also (&&) returns false (!)
+    // If there is no right node, leave the if and check for another branch
+    // Run the function on the right-side branch, passing that node's value as the min
+    // If running checkBST on the right returns true, leave the loop and check for another branch
+    // If it returns false, BST is false
+    if (tree.right && !checkBST(tree.right, tree.data, max)) {
+        return false;
+    }
+    // Continue until there are no more branches to check (tree.left and tree.right are null)
+    // All checks have passed and BST is true
+    return true;
+  };
+  
+  checkBST(tree);
 
 //Write an algorithm to find the third largest node in a binary search tree

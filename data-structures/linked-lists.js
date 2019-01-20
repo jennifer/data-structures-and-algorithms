@@ -1,3 +1,95 @@
+class LinkedList {
+    constructor() {
+      this.length = 0;
+      this.head = null;
+    }
+    insert(index, value) {
+      if (index < 0 || index > this.length) {
+        throw new Error('Index error');
+      }
+      const newNode = {
+        value
+      };
+      if (index == 0) {
+        newNode.next = this.head;
+        this.head = newNode;
+      }
+      else {
+        const node = this._find(index - 1);
+        newNode.next = node.next;
+        node.next = newNode;
+      }
+      this.length++;
+    }
+    _find(index) {
+        let node = this.head;
+        for (let i=0; i<index; i++) {
+            node = node.next;
+        }
+        return node;
+    }
+    get(index) {
+      if (index < 0 || index >= this.length) {
+        throw new Error('Index error');
+      }
+  
+      return this._find(index).value;
+    }
+    remove(index) {
+      if (index < 0 || index >= this.length) {
+        throw new Error('Index error');
+      }
+      if (index == 0) {
+        this.head = this.head.next;
+      }
+      else {
+        const node = this._find(index - 1);
+        node.next = node.next.next;
+      }
+      this.length--;
+    }
+  }
+  
+  // Make a new list:
+  let linkedList = new LinkedList();
+  // Add data:
+  linkedList.insert(0, "A");
+  linkedList.insert(1, "B");
+  linkedList.insert(2, "C");
+  linkedList.insert(3, "D");
+  linkedList.insert(4, "E");
+  linkedList.insert(5, "F");
+  
+  // Show length, head, and partial list:
+  // console.log(linkedList);
+  
+  // Show full list:
+  // console.log(JSON.stringify(linkedList));
+  
+  // Show full list with easier to read format:
+  // console.log(JSON.stringify(linkedList, null, 2));
+  
+  // Write an algorithm to find the middle element of a linked list without using the .length property
+  function findMiddle () {
+    let slow = linkedList.head;
+    let fast = linkedList.head;
+    while (fast.next !== null && fast.next.next !== null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    return slow;
+  }
+  // findMiddle(linkedList);
+  
+  // Write an algorithm to find the third element from the end of a linked list without using the .length property
+  function findThirdFromEnd(){
+    let node = linkedList.head;
+    while (node.next.next.next !== null) {
+      node = node.next;
+    }
+    return node;
+  }
+
 // ES2015 Class method
 class LinkedList {
     constructor() {

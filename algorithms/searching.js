@@ -159,3 +159,31 @@ function maxProfit(prices) {
 };
 
 maxProfit([128, 97, 121, 123, 98, 97, 105])
+
+
+//Imagine that you wanted to find what the highest floor of a 100 story
+//building you could drop an egg was, without the egg breaking. But you only
+//have two eggs. Write an algorithm to work out which floors you should drop
+//the eggs from to find this out in the most efficient way.
+
+function Building() {
+    this.answer = Math.floor(Math.random() * 100) + 1;
+    this.eggs = 2;
+    this.drop = function (floor) {
+      if (this.eggs < 1) {
+        throw new Error("both broken");
+      }
+      if (floor > this.answer) {
+        this.eggs -= 1;
+        return "broken";
+      } else {
+        return "ok";
+      }
+    }
+  }
+  
+  // Example usage:
+  const searsTower = new Building
+  console.log(searsTower.drop(1))
+  console.log(searsTower.drop(50))
+  console.log(searsTower.drop(101))

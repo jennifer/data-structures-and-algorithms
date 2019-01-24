@@ -93,3 +93,33 @@ class HashMap {
   
   HashMap.MAX_LOAD_RATIO = 0.9;
   HashMap.SIZE_RATIO = 3;
+
+
+// ALGORITHM PRACTICE
+
+// Write an algorithm to check whether any permutation of a string is a palindrome. 
+// Doesn't work
+function palindrome(str) {
+    let hashMap = new HashMap();
+    for (let i = 0; i < str.length; i++) {
+        let key = HashMap._hashString(str[i]);
+        let count = 1;
+        key in hashMap ? hashMap.set(key, count += 1) : hashMap.set(key, count);
+        // Always returns false:
+        // console.log(key in hashMap);
+    };
+    // Confirms that the keys are in the array properly, but values are not incrementing:
+    console.log(hashMap);
+    // Check if any values are odd
+  };
+  
+  palindrome("racecar")
+
+
+// Write an algorithm to group a list of words into anagrams. 
+// For example, if the input was ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race'], 
+// the output should be: [['east', 'teas', 'eats'], ['cars', 'arcs'], ['acre', 'race']].
+
+
+// Write a hash map implementation which uses separate chaining.
+// See implementation in line above

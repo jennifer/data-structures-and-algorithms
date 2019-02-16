@@ -31,13 +31,9 @@ function andOr(a, b, op) {
 
 andOr(1, 0, "^");
 
-// Write a function which sets the third bit of a number.
+// Write a function that takes in an integer value and prints out its complement value.
+function not(int) {
+    return ~int + 1;
+};
 
-
-// Write a function which toggles the third bit of a number.
-
-
-// Write a function which clears (sets to zero) the third bit of a number.
-
-
-// Write a function which tells you whether the third bit of a number is set.
+not(1);
